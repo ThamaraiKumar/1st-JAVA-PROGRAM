@@ -1,0 +1,57 @@
+import java.util.Calendar;
+import java.util.Scanner;
+import java.io.File;
+//import java.io.IOException;
+import java.util.regex.*;
+import java.io.*;
+public class File1 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		try
+		{
+			File obj=new File("C:\\Users\\Admin\\eclipse-workspace\\FileSample\\Myfile.txt");
+			if(obj.createNewFile())
+			{
+				System.out.println("File Created:" + obj.getName());
+			}
+			else
+			{
+				//System.out.println("File is Already exists.");	
+			    Scanner read=new Scanner(obj);
+			    while(read.hasNextLine())
+			    {
+				    String name=read.next();
+				    String num=read.next();
+				    String regex="[7-9]{1}[0-9]{9}";
+				    if(Pattern.matches(regex,num))
+				    {
+				    	System.out.println(name + " " + num);
+					    File n1 = new File("C:\\Users\\Admin\\eclipse-workspace\\FileSample\\" + name + ".txt");
+					    if(n1.createNewFile())
+					    {
+					    	System.out.println("Created!!!");
+					    }
+					    else
+					    {
+					    	System.out.println("Not Created!!");
+					    }
+					    Calendar cal=Calendar.getInstance();
+					    FileWriter writer=new FileWriter(name + ".txt");
+					    writer.write(cal.getTime().toString());;
+					    writer.close();
+					    System.out.println(cal.getTime());
+				    }
+			     }
+			    read.close();
+			}
+		}
+		catch(Exception e)
+		{
+			System.out.println("Error Occurred");
+			e.printStackTrace();
+		}
+
+	}
+
+}
